@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" type="text/css" href="src/css/index.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="calculator">
+        <h1 id="total">0</h1>
+        <div class="digits flex">
+          <button class="digit">9</button>
+          <button class="digit">8</button>
+          <button class="digit">7</button>
+          <button class="digit">6</button>
+          <button class="digit">5</button>
+          <button class="digit">4</button>
+          <button class="digit">3</button>
+          <button class="digit">2</button>
+          <button class="digit">1</button>
+          <button class="digit">0</button>
+        </div>
+        <div class="modifiers subgrid">
+          <button class="modifier">AC</button>
+        </div>
+        <div class="operations subgrid">
+          <button class="operation">/</button>
+          <button class="operation">X</button>
+          <button class="operation">-</button>
+          <button class="operation">+</button>
+          <button class="operation">=</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const result = document.getElementById("total");
+      const operations = document.querySelectorAll(".operation");
+      document
+        .getElementById("app")
+        .addEventListener("click", function (event) {
+          const target = event.target;
+
+          if (target.classList.contains("digit")) {
+            handleDigitClick(target.textContent);
+          }
+          if (target.classList.contains("operation")) {
+            handleOperationClick(target.textContent);
+          }
+          if (target.classList.contains("modifier")) {
+            handleResetClick();
+          }
+          if (target.textContent === "=") {
+            calculate();
+          }
+        });
+
+      let currentInput = "";
+      let displayValue = "";
+      let resultValue = "";
+      let operator = "";
+      function handleDigitClick(digit) {
+        currentInput += digit;
+        displayValue += digit;
+        result.textContent = displayValue;
+      }
+
+      function handleOperationClick(operation) {
+        if (operator === "") {
+          currentInput += operation;
+          displayValue += operation;
+          operator = operation;
+          result.textContent = displayValue;
+          console.log(operation);
+        }
+      }
+
+      function handleResetClick() {
+        currentInput = "";
+        displayValue = 0;
+        resultValue = "";
+        operator = "";
+        result.textContent = displayValue;
+      }
+
+      function calculate() {
+        let calculation = currentInput.split(operator);
+        console.log(calculation);
+        let operand1 = parseFloat(calculation[0]);
+        let operand2 = parseFloat(calculation[1]);
+
+        switch (operator) {
+          case "+":
+            resultValue = operand1 + operand2;
+            break;
+          case "-":
+            resultValue = operand1 - operand2;
+            break;
+          case "*":
+            resultValue = operand1 * operand2;
+            break;
+          case "/":
+            resultValue = operand1 / operand2;
+            break;
+        }
+
+        result.textContent = resultValue.toFixed(5);
+        currentInput = resultValue.toString();
+        displayValue = currentInput;
+      }
+    </script>
+  </body>
+</html>
