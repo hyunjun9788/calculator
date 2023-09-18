@@ -36,6 +36,10 @@
     </div>
 
     <script>
+      let calculation = currentInput.split(operator);
+      console.log(calculation);
+      let operand1 = parseFloat(calculation[0]);
+      let operand2 = parseFloat(calculation[1]);
       const result = document.getElementById("total");
       const operations = document.querySelectorAll(".operation");
       document
@@ -62,6 +66,9 @@
       let resultValue = "";
       let operator = "";
       function handleDigitClick(digit) {
+        // if (currentInput.length >= 3) {
+        //   return;
+        // }
         currentInput += digit;
         displayValue += digit;
         result.textContent = displayValue;
@@ -86,10 +93,10 @@
       }
 
       function calculate() {
-        let calculation = currentInput.split(operator);
-        console.log(calculation);
-        let operand1 = parseFloat(calculation[0]);
-        let operand2 = parseFloat(calculation[1]);
+        // let calculation = currentInput.split(operator);
+        // console.log(calculation);
+        // let operand1 = parseFloat(calculation[0]);
+        // let operand2 = parseFloat(calculation[1]);
 
         switch (operator) {
           case "+":
@@ -106,7 +113,7 @@
             break;
         }
 
-        result.textContent = resultValue.toFixed(5);
+        result.textContent = Math.floor(resultValue);
         currentInput = resultValue.toString();
         displayValue = currentInput;
       }
