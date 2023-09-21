@@ -34,12 +34,8 @@
         </div>
       </div>
     </div>
-
+    //
     <script>
-      let calculation = currentInput.split(operator);
-      console.log(calculation);
-      let operand1 = parseFloat(calculation[0]);
-      let operand2 = parseFloat(calculation[1]);
       const result = document.getElementById("total");
       const operations = document.querySelectorAll(".operation");
       document
@@ -93,10 +89,10 @@
       }
 
       function calculate() {
-        // let calculation = currentInput.split(operator);
-        // console.log(calculation);
-        // let operand1 = parseFloat(calculation[0]);
-        // let operand2 = parseFloat(calculation[1]);
+        let calculation = currentInput.split(operator);
+        console.log(calculation);
+        let operand1 = parseFloat(calculation[0]);
+        let operand2 = parseFloat(calculation[1]);
 
         switch (operator) {
           case "+":
